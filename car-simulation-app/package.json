@@ -1,0 +1,33 @@
+{
+  "name": "car-simulation-app",
+  "version": "1.0.0",
+  "description": "A web application for simulating car purchase costs based on various parameters.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "car",
+    "simulation"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.1.0",
+    "react-redux": "^7.2.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.27.1"
+  },
+  "homepage": "http://yourusername.github.io/car-simulation-app"
+}

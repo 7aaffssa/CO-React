@@ -3,8 +3,9 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { Provider } from 'react-redux'
-import { store } from './store.js'
+// import { store } from './store.js'
 // import store from './components/Immer/aStore/store';
+import store from './components/Voiture/redux/store.js';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,4 +14,5 @@ createRoot(document.getElementById('root')).render(
 
     </Provider>
   </StrictMode>,
+  
 )
