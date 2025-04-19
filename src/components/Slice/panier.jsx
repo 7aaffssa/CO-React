@@ -1,6 +1,6 @@
 import React,{ useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { addItem,removeItem,clearCart } from "./Slice/panierSlice";
+import { addItem,removeItem,clearCart } from "./panierSlice";
 
 export default function Panier(){
     const [nom,setNom]=useState('');

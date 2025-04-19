@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import panierReducer from "./components/panierSlice";
+import panierReducer from "./components/Slice/panierSlice";
 
 export const store = configureStore({
   reducer: {
