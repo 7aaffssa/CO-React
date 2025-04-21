@@ -11,43 +11,101 @@ const cars = [
 
 function CarList() {
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Liste des voitures disponibles :</h2>
-      <table style={tableStyle}>
-        <thead>
-          <tr>
-            <th>Marque</th>
-            <th>Modèle</th>
-            <th>Type du carburant</th>
-            <th>Prix de base</th>
-            <th>Détails</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cars.map((car, index) => (
-            <tr key={index}>
-              <td>{car.marque}</td>
-              <td>{car.modele}</td>
-              <td>{car.carburant}</td>
-              <td>{car.prix.toLocaleString()} DH</td>
-              <td>
-                <Link to={`/car/${car.marque}-${car.modele.replace(/\s+/g, '')}`}>
-                  <button>Détails</button>
-                </Link>
-              </td>
+    <div style={containerStyle}>
+      <h2 style={titleStyle}>🚗 Liste des voitures disponibles</h2>
+
+      <div style={{ overflowX: 'auto' }}>
+        <table style={tableStyle}>
+          <thead>
+            <tr>
+              <th style={thStyle}>Marque</th>
+              <th style={thStyle}>Modèle</th>
+              <th style={thStyle}>Carburant</th>
+              <th style={thStyle}>Prix de base</th>
+              <th style={thStyle}>Détails</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {cars.map((car, index) => (
+              <tr key={index} style={index % 2 === 0 ? evenRowStyle : oddRowStyle}>
+                <td style={tdStyle}>{car.marque}</td>
+                <td style={tdStyle}>{car.modele}</td>
+                <td style={tdStyle}>{car.carburant}</td>
+                <td style={tdStyle}>{car.prix.toLocaleString()} DH</td>
+                <td style={tdStyle}>
+                  <Link to={`/car/${car.marque}-${car.modele.replace(/\s+/g, '')}`}>
+                    <button style={buttonStyle}>Détails</button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
+// Styles
+const containerStyle = {
+  padding: '2rem',
+  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  backgroundColor: '#f7f9fa',
+  minHeight: '100vh',
+};
+
+const titleStyle = {
+  fontSize: '1.8rem',
+  marginBottom: '1.5rem',
+  color: '#34495e',
+  borderBottom: '3px solid #3498db',
+  paddingBottom: '0.5rem',
+  maxWidth: '600px',
+};
+
 const tableStyle = {
-  borderCollapse: 'collapse',
   width: '100%',
-  marginTop: '20px',
-  border: '1px solid #ddd',
+  borderCollapse: 'collapse',
+  minWidth: '700px',
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+  borderRadius: '6px',
+  overflow: 'hidden',
+};
+
+const thStyle = {
+  backgroundColor: '#3498db',
+  color: 'white',
+  textAlign: 'left',
+  padding: '12px',
+};
+
+const tdStyle = {
+  padding: '12px',
+  textAlign: 'left',
+  color: '#2c3e50',
+};
+
+const evenRowStyle = {
+  backgroundColor: '#ecf0f1',
+};
+
+const oddRowStyle = {
+  backgroundColor: '#ffffff',
+};
+
+const buttonStyle = {
+  backgroundColor: '#27ae60',
+  color: '#fff',
+  border: 'none',
+  padding: '8px 14px',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  fontSize: '0.9rem',
+  transition: 'background-color 0.3s ease',
+};
+
+buttonStyle[':hover'] = {
+  backgroundColor: '#219150',
 };
 
 export default CarList;

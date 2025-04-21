@@ -1,4 +1,3 @@
-// redux/simulationSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 export const simulationSlice = createSlice({

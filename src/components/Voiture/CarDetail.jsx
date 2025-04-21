@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-// Données complètes pour toutes les voitures
 const carDetails = {
   'Opel-Astra': {
     marque: 'Opel',
@@ -43,47 +42,82 @@ const carDetails = {
 function CarDetail() {
   const { id } = useParams();
   const car = carDetails[id];
-
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (car) {
       let additionalCost = 0;
-
-      // Ajout du coût en fonction du carburant
       switch (car.carburant) {
         case 'Diesel':
-          additionalCost += 10000;
+          additionalCost = 10000;
           break;
         case 'Hybride':
-          additionalCost += 15000;
+          additionalCost = 15000;
           break;
         case 'Essence':
-          additionalCost += 5000;
+          additionalCost = 5000;
           break;
         default:
           break;
       }
-
       setTotal(car.prix + additionalCost);
     }
   }, [car]);
 
   if (!car) {
-    return <div style={{ padding: '20px' }}>Voiture non trouvée.</div>;
+    return <div style={{ padding: '2rem', fontFamily: 'Arial' }}>Voiture non trouvée.</div>;
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Détail de la voiture</h2>
-      <p><strong>Marque:</strong> {car.marque}</p>
-      <p><strong>Modèle:</strong> {car.modele}</p>
-      <p><strong>Carburant:</strong> {car.carburant}</p>
-      <p><strong>Prix de base:</strong> {car.prix.toLocaleString()} DH</p>
-      <p><strong>Fiche technique:</strong> {car.fiche}</p>
-      <p style={{ fontWeight: 'bold', color: 'green' }}>
-        Prix total estimé: {total.toLocaleString()} DH
-      </p>
+    <div style={{
+      padding: '2rem',
+      fontFamily: 'Arial, sans-serif',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+      <div style={{
+        backgroundColor: '#fff',
+        borderRadius: '12px',
+        padding: '2rem',
+        maxWidth: '500px',
+        width: '100%',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        border: '1px solid #eee'
+      }}>
+        <h2 style={{
+          marginBottom: '1.5rem',
+          color: '#2c3e50',
+          fontSize: '1.8rem',
+          borderBottom: '1px solid #ddd',
+          paddingBottom: '0.5rem'
+        }}>
+          Détail de la voiture
+        </h2>
+
+        <p><strong> Marque:</strong> {car.marque}</p>
+        <p><strong> Modèle:</strong> {car.modele}</p>
+        <p><strong> Carburant:</strong> {car.carburant}</p>
+        <p><strong> Prix de base:</strong> {car.prix.toLocaleString()} DH</p>
+        <p><strong> Fiche technique:</strong> {car.fiche}</p>
+
+        <div style={{
+          marginTop: '1.5rem',
+          padding: '1rem',
+          backgroundColor: '#f4f8f6',
+          borderRadius: '8px',
+          borderLeft: '5px solid #27ae60',
+        }}>
+          <p style={{
+            margin: 0,
+            fontWeight: 'bold',
+            fontSize: '1.2rem',
+            color: '#27ae60'
+          }}>
+            Prix total estimé : {total.toLocaleString()} DH
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

@@ -41,9 +41,7 @@ function CarSimulation() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const car = cars.find(
-      c => `${c.marque}-${c.modele}` === e.target.value
-    );
+    const car = cars.find(c => `${c.marque}-${c.modele}` === e.target.value);
     setSelectedCar(car);
     setSelectedModel(car.modele);
     setSelectedFuel(car.carburant);
@@ -86,11 +84,11 @@ function CarSimulation() {
   };
 
   return (
-    <div style={{ padding: 20, fontFamily: 'Arial', maxWidth: 600, margin: 'auto' }}>
-      <h2 style={{ color: '#333' }}>Simulation d'achat</h2>
+    <div style={containerStyle}>
+      <h2 style={titleStyle}>🚘 Simulation d'achat de voiture</h2>
 
-      <label>Choisir une voiture :</label>
-      <select onChange={handleChange} style={{ marginBottom: 10, display: 'block', padding: 5 }}>
+      <label style={labelStyle}>Choisir une voiture :</label>
+      <select onChange={handleChange} style={selectStyle}>
         <option value="">-- Sélectionnez --</option>
         {cars.map(car => (
           <option key={`${car.marque}-${car.modele}`} value={`${car.marque}-${car.modele}`}>
@@ -101,15 +99,15 @@ function CarSimulation() {
 
       {selectedCar && (
         <>
-          <label>Modèle :</label>
-          <select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)} style={{ display: 'block', padding: 5 }}>
+          <label style={labelStyle}>Modèle :</label>
+          <select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)} style={selectStyle}>
             {cars.map(car => (
               <option key={car.modele} value={car.modele}>{car.modele}</option>
             ))}
           </select>
 
-          <label>Type de carburant :</label>
-          <select value={selectedFuel} onChange={(e) => setSelectedFuel(e.target.value)} style={{ display: 'block', padding: 5 }}>
+          <label style={labelStyle}>Type de carburant :</label>
+          <select value={selectedFuel} onChange={(e) => setSelectedFuel(e.target.value)} style={selectStyle}>
             <option value="Essence">Essence</option>
             <option value="Diesel">Diesel</option>
             <option value="Hybride">Hybride</option>
@@ -117,31 +115,27 @@ function CarSimulation() {
           </select>
 
           <div style={{ marginTop: 10 }}>
-            <label><input type="checkbox" name="toit" onChange={handleOptionChange} /> Toit ouvrant</label><br />
-            <label><input type="checkbox" name="gps" onChange={handleOptionChange} /> GPS</label><br />
-            <label><input type="checkbox" name="led" onChange={handleOptionChange} /> Phares LED</label><br />
-            <label><input type="checkbox" name="camera" onChange={handleOptionChange} /> Caméra de recul</label>
+            <label style={checkboxStyle}><input type="checkbox" name="toit" onChange={handleOptionChange} /> Toit ouvrant</label><br />
+            <label style={checkboxStyle}><input type="checkbox" name="gps" onChange={handleOptionChange} /> GPS</label><br />
+            <label style={checkboxStyle}><input type="checkbox" name="led" onChange={handleOptionChange} /> Phares LED</label><br />
+            <label style={checkboxStyle}><input type="checkbox" name="camera" onChange={handleOptionChange} /> Caméra de recul</label>
           </div>
 
           {result && (
-            <div style={{ marginTop: 20, backgroundColor: '#f9f9f9', padding: 15, borderRadius: 8, boxShadow: '0 0 5px rgba(0,0,0,0.1)' }}>
-              <p>Prix de base : {result.base.toLocaleString()} DH</p>
-              <p>Frais options : {result.optionsCost.toLocaleString()} DH</p>
-              <p>Supplément modèle : {result.modelCost.toLocaleString()} DH</p>
-              <p>Supplément carburant : {result.fuelCost.toLocaleString()} DH</p>
-              <p>Taxe (10%) : {result.tax.toLocaleString()} DH</p>
-              <p>Immatriculation : {result.immatriculation.toLocaleString()} DH</p>
-              <strong>Total : {result.total.toLocaleString()} DH</strong>
+            <div style={resultBoxStyle}>
+              <p> Prix de base : <strong>{result.base.toLocaleString()} DH</strong></p>
+              <p> Options : <strong>{result.optionsCost.toLocaleString()} DH</strong></p>
+              <p> Supplément modèle : <strong>{result.modelCost.toLocaleString()} DH</strong></p>
+              <p> Supplément carburant : <strong>{result.fuelCost.toLocaleString()} DH</strong></p>
+              <p> Taxe (10%) : <strong>{result.tax.toLocaleString()} DH</strong></p>
+              <p> Immatriculation : <strong>{result.immatriculation.toLocaleString()} DH</strong></p>
+              <h3 style={{ color: '#2980b9' }}>💳 Total : {result.total.toLocaleString()} DH</h3>
             </div>
           )}
 
           <div style={{ marginTop: 15 }}>
-            <button onClick={enregistrer} style={{ marginRight: 10, padding: '8px 15px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: 5 }}>
-              Enregistrer simulation
-            </button>
-            <button onClick={() => navigate(-1)} style={{ padding: '8px 15px', backgroundColor: '#f44336', color: 'white', border: 'none', borderRadius: 5 }}>
-              Retour
-            </button>
+            <button onClick={enregistrer} style={saveButtonStyle}>💾 Enregistrer</button>
+            <button onClick={() => navigate(-1)} style={backButtonStyle}>🔙 Retour</button>
           </div>
         </>
       )}
@@ -150,3 +144,69 @@ function CarSimulation() {
 }
 
 export default CarSimulation;
+
+// 🎨 Styles
+const containerStyle = {
+  padding: '2rem',
+  fontFamily: "'Segoe UI', sans-serif",
+  maxWidth: '650px',
+  margin: 'auto',
+  backgroundColor: '#ffffff',
+  borderRadius: '10px',
+  boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+  color: '#2c3e50',
+};
+
+const titleStyle = {
+  color: '#2c3e50',
+  borderBottom: '3px solid #3498db',
+  paddingBottom: '0.5rem',
+  marginBottom: '1.5rem',
+};
+
+const labelStyle = {
+  marginTop: '1rem',
+  fontWeight: 'bold',
+  display: 'block',
+};
+
+const selectStyle = {
+  width: '100%',
+  padding: '10px',
+  marginTop: '5px',
+  borderRadius: '5px',
+  border: '1px solid #ccc',
+  marginBottom: '1rem',
+};
+
+const checkboxStyle = {
+  display: 'block',
+  marginTop: '8px',
+};
+
+const resultBoxStyle = {
+  marginTop: '20px',
+  backgroundColor: '#ecf6fd',
+  padding: '15px',
+  borderRadius: '8px',
+  border: '1px solid #bcdffb',
+};
+
+const saveButtonStyle = {
+  backgroundColor: '#3498db',
+  color: '#fff',
+  border: 'none',
+  padding: '10px 20px',
+  borderRadius: '6px',
+  cursor: 'pointer',
+  marginRight: '10px',
+};
+
+const backButtonStyle = {
+  backgroundColor: '#95a5a6',
+  color: '#fff',
+  border: 'none',
+  padding: '10px 20px',
+  borderRadius: '6px',
+  cursor: 'pointer',
+};
